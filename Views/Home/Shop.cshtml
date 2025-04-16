@@ -1,5 +1,115 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Fertilizer360.Models.Shop>
+
 @{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="position-relative">
+    <div style="height: 300px; overflow: hidden;">
+        <img src="https://www.buddgroup.com/wp-content/uploads/2024/10/The-budd-group-commercial-fertilization-options.webp"
+             class="img-fluid"
+             style="width: 100%; height: 100%; object-fit: fill;"
+             alt="Contact Banner">
+    </div>
+    <div class="position-absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <h1 class="text-dark font-weight-bold">Shop</h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Filter Section -->
+    <div class="d-flex justify-content-center mb-4">
+        <form method="get" asp-action="Shop" class="p-3 bg-light rounded shadow" style="width: 100%; max-width: 500px;">
+            <div class="mb-3">
+                <label>State</label>
+                <select name="state" class="form-control">
+                    <option value="">Select State</option>
+                    @foreach (var state in Model.Select(s => s.State).Distinct())
+                    {
+                        <option value="@state">@state</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>District</label>
+                <select name="district" class="form-control">
+                    <option value="">Select District</option>
+                    @foreach (var district in Model.Select(s => s.District).Distinct())
+                    {
+                        <option value="@district">@district</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Village/Taluka</label>
+                <select name="villageOrTaluka" class="form-control">
+                    <option value="">Select Village/Taluka</option>
+                    @foreach (var village in Model.Select(s => s.VillageOrTaluka).Distinct())
+                    {
+                        <option value="@village">@village</option>
+                    }
+                </select>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-warning">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Shop Cards - Grid Layout -->
+    <div class="row">
+        @foreach (var shop in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <a href="@Url.Action("ShopDetails", "Home", new { id = shop.Id })" class="text-decoration-none text-dark">
+                    <div class="card">
+                        <img src="@shop.Image" class="card-img-top" alt="Shop Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body p-2">
+                            <h6 class="card-title mb-1 font-weight-bold">@shop.Name</h6>
+                            <p class="card-text mb-0" style="font-size: 0.85rem;">@shop.Address</p>
+                            <p class="card-text mb-0" style="font-size: 0.85rem;">@shop.VillageOrTaluka, Ground Floor,</p>
+                            <p class="card-text mb-0" style="font-size: 0.85rem;">@shop.District,</p>
+                            <p class="card-text" style="font-size: 0.85rem;">@shop.State</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4 mb-5">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item active">
+                    <a class="page-link" href="#" style="background-color: #c29a34; border-color: #c29a34;">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" style="color: #000;">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" style="color: #000;">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
